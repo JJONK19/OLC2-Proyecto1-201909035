@@ -32,7 +32,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="Menu">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -117,14 +117,24 @@ font: 18pt &quot;Sitka Display&quot;;
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="BEditor">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>160</y>
-        <width>230</width>
+        <width>231</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(57, 91, 100);
+}</string>
       </property>
       <property name="text">
        <string>Ir al Editor</string>
@@ -163,53 +173,93 @@ font: 18pt &quot;Sitka Display&quot;;
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="BSimbolos">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>250</y>
-        <width>230</width>
+        <width>231</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(57, 91, 100);
+}</string>
       </property>
       <property name="text">
        <string>Tabla de Simbolos</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="BErrores">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>300</y>
-        <width>230</width>
+        <width>231</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(57, 91, 100);
+}</string>
       </property>
       <property name="text">
        <string>Errores Encontrados</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="BBases">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>350</y>
-        <width>230</width>
+        <width>231</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(57, 91, 100);
+}</string>
       </property>
       <property name="text">
        <string>Bases de Datos Existentes</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="BTablas">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>400</y>
-        <width>230</width>
+        <width>231</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(57, 91, 100);
+}</string>
       </property>
       <property name="text">
        <string>Tablas de Bases de Datos</string>
@@ -248,21 +298,31 @@ font: 18pt &quot;Sitka Display&quot;;
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="BInfo">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>490</y>
-        <width>230</width>
+        <width>231</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(35, 35, 35);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(57, 91, 100);
+}</string>
       </property>
       <property name="text">
        <string>Información del Creador</string>
       </property>
      </widget>
     </widget>
-    <widget class="QStackedWidget" name="stackedWidget">
+    <widget class="QStackedWidget" name="Vistas">
      <property name="geometry">
       <rect>
        <x>250</x>
@@ -271,8 +331,40 @@ font: 18pt &quot;Sitka Display&quot;;
        <height>531</height>
       </rect>
      </property>
-     <widget class="QWidget" name="page"/>
-     <widget class="QWidget" name="page_2"/>
+     <widget class="QWidget" name="Editor">
+      <widget class="QPushButton" name="EB">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>200</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PushButton</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Simbolos">
+      <widget class="QPushButton" name="SB">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>180</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>A</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Errores"/>
+     <widget class="QWidget" name="Bases"/>
+     <widget class="QWidget" name="Tablas"/>
+     <widget class="QWidget" name="Info"/>
     </widget>
    </widget>
   </widget>
