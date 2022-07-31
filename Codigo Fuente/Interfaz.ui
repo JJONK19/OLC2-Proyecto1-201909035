@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1271</width>
-    <height>575</height>
+    <height>577</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -331,7 +331,137 @@ QPushButton:hover {
        <height>531</height>
       </rect>
      </property>
-     <widget class="QWidget" name="Editor"/>
+     <widget class="QWidget" name="Editor">
+      <widget class="QLabel" name="label_18">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>171</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(231, 246, 242);
+font: italic 32pt &quot;Sitka Display&quot;;
+text-decoration: underline;
+</string>
+       </property>
+       <property name="text">
+        <string>Editor</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::AutoText</enum>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QsciScintilla" name="Entrada">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>471</width>
+         <height>391</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="whatsThis">
+        <string/>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;Sitka Display&quot;;
+</string>
+       </property>
+      </widget>
+      <widget class="QsciScintilla" name="Consola">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>520</x>
+         <y>70</y>
+         <width>471</width>
+         <height>391</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="whatsThis">
+        <string/>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 12pt &quot;Sitka Display&quot;;
+</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="BAnalizar">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>480</y>
+         <width>471</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(57, 91, 100);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(35, 35, 35);
+}</string>
+       </property>
+       <property name="text">
+        <string>Analizar</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="BLimpiar">
+       <property name="geometry">
+        <rect>
+         <x>520</x>
+         <y>480</y>
+         <width>471</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(57, 91, 100);
+	border: 0px solid;
+}
+QPushButton:hover {
+	background-color: rgb(35, 35, 35);
+}</string>
+       </property>
+       <property name="text">
+        <string>Limpiar</string>
+       </property>
+      </widget>
+     </widget>
      <widget class="QWidget" name="Simbolos">
       <widget class="QLabel" name="label_17">
        <property name="geometry">
@@ -1091,6 +1221,13 @@ font: 18pt &quot;Sitka Display&quot;;
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QsciScintilla</class>
+   <extends>QFrame</extends>
+   <header>Qsci/qsciscintilla.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
