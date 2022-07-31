@@ -61,14 +61,6 @@ class ventana (QtWidgets.QMainWindow):
             casilla = QTableWidgetItem(str(data))   #Crea una casilla con el dato
             tabla.setItem(fila, col, casilla)
             col +=1
-        
-    def reiniciarTabla(self, tabla):
-        """
-        reiniciarTabla borra todas las filas que se encuentran en la tabla.
-        :param tabla: Variable que referencia a la tabla a la que se desea añadir el valor: 
-
-        """
-        tabla.setRowCount(0)
 
     def analizar(self):
         """
@@ -79,6 +71,8 @@ class ventana (QtWidgets.QMainWindow):
         #--- Recopilar el texto
         ENTRADA = self.Entrada.text()
 
+        #--- Analizar cadena
+
     def limpiar(self):
         """
         limpiar borra toda la información almacenada en la consola y en las tablas.
@@ -86,7 +80,11 @@ class ventana (QtWidgets.QMainWindow):
         """
         self.Entrada.setText("")
         self.Consola.setText("")
-        
+        self.TBases.setRowCount(0)
+        self.TErrores.setRowCount(0)
+        self.TSimbolos.setRowCount(0)
+        self.TTablas.setRowCount(0)
+
 
 app = QtWidgets.QApplication(sys.argv)
 main = ventana()
