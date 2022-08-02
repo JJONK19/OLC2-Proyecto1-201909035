@@ -72,6 +72,7 @@ class ventana (QtWidgets.QMainWindow):
         ENTRADA = self.Entrada.text()
 
         #--- Analizar cadena
+        ...
 
     def limpiar(self):
         """

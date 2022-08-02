@@ -572,7 +572,7 @@ QTableWidget::item {
        </column>
        <column>
         <property name="text">
-         <string>FIla</string>
+         <string>Fila</string>
         </property>
        </column>
        <column>
@@ -654,13 +654,13 @@ QTableWidget::item {
         <enum>Qt::ElideRight</enum>
        </property>
        <property name="columnCount">
-        <number>5</number>
+        <number>7</number>
        </property>
        <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>194</number>
+        <number>139</number>
        </attribute>
        <attribute name="verticalHeaderVisible">
         <bool>false</bool>
@@ -693,6 +693,16 @@ QTableWidget::item {
        <column>
         <property name="text">
          <string>Línea</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Columna</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Fecha</string>
         </property>
        </column>
       </widget>
