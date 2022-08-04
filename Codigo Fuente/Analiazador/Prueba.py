@@ -1,8 +1,6 @@
-thisdict = {
-  "brand": "Ford",
-  "model": "Mustang",
-  "year": 1964
-}
-t = "bran"
-x = thisdict.get(t, 'ID')
-print(x)
+from Recursos.Enum.TipoDato import TIPO_DATO
+from Recursos.Instruccion import Instruccion
+
+salida = Instruccion.operacion(1,2,1,1,1)
+print(salida)
+
