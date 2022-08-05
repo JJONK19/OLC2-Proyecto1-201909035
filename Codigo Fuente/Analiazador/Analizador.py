@@ -1,10 +1,10 @@
 from asyncio.windows_events import NULL
 from ply import lex, yacc
-from Recursos.Errores.Error import error
-from Recursos.Instruccion import Instruccion
-from Recursos.Enum.TipoDato import TIPO_DATO
-from Recursos.Enum.TipoValor import TIPO_VALOR
-from Recursos.Enum.TipoOperacion import TIPO_OPERACION
+from Recursos.Error import error
+from Recursos import Instruccion
+from Recursos.TipoDato import TIPO_DATO
+from Recursos.TipoValor import TIPO_VALOR
+from Recursos.TipoOperacion import TIPO_OPERACION
 from datetime import date
 
 class Analizador:
@@ -19,7 +19,7 @@ class Analizador:
 
 #-----------------------------------------------------------------------------------------
     states = (
-        ('cadena', 'exclusive')
+        ('cadena', 'exclusive'),
     )
 
     reservadas = {
@@ -37,16 +37,20 @@ class Analizador:
         'char' : 'char',
         '&str' : 'str',
         'pow' : 'pow',
-        'powF' : 'powF',
+        'powf' : 'powf',
         'as' : 'as',
-        'String' : 'string'
+        'fn' : 'fn',
+        'main' : 'main', 
+        'String' : 'string',
+        'println!' : 'print',
     }
 
-    tokens = reservadas + {
-        'mas', 'menos', 'mul', 'div', 'ptocoma', 'entero', 'float', 'id', 'char', 'cadena', 'coma',
+    tokens = list(reservadas.values()) + [
+        'mas', 'menos', 'mul', 'div', 'ptocoma', 'entero', 'float', 'id', 'car', 'cadena', 'coma',
         'corA', 'corC', 'dosptos', 'menor', 'mayor', 'igual', 'parA', 'parC', 'ddosptos', 'not', 
-        'llavA', 'llavC', 'mod', 'or', 'and' 'Comentarios', 'SaltoLinea', 
-    }
+        'llavA', 'llavC', 'mod', 'or', 'and', 'menorIgual', 'mayorIgual', 'Comentarios', 'SaltoLinea',
+        'desigual', 'asignacion'
+    ]
 
     t_ignore = ' \t'
 
@@ -78,9 +82,9 @@ class Analizador:
     t_menos = r'-'
     t_mul = r'\*'
     t_div = r'/'
-    t_igual = r'%'
+    t_mod = r'%'
     t_ptocoma = r';'
-    t_char = r'\'("\n"|"\\\\"|"\t"|"\r"|\\\'|\\\"|.)\''
+    t_car = r'\'("\n"|"\\\\"|"\t"|"\r"|\\\'|\\\"|.)\''
     t_coma = r','
     t_corA = r'\['
     t_corC = r'\]'
@@ -206,41 +210,55 @@ class Analizador:
         else:
             t[0] = [t[1]]
 
-    def p_SENTENCIA(t):
-        '''SENTENCIA : EXPRESION 
+    #Sentencias-------------------------------------------------------------------------------------
+    def p_SENTENCIAS_MAIN(t):
+        '''SENTENCIA : DMAIN 
         '''
         t[0] = t[1]
 
-    #Tipos-------------------------------------------------------------------------------------------
-    def p_TIPO_I64(t):
-        '''TIPO : i64
+    #Main--------------------------------------------------------------------------------------------
+    def p_MAIN(t):
+        '''DMAIN : fn main parA parC llavA INSTRUCCIONES llavC 
         '''
-        t[0] = TIPO_DATO["I64"]
+        t[0] = Instruccion.dmain(t[6], t.lineno(1), t.lexpos(1))
 
-    def p_TIPO_F64(t):
-        '''TIPO : f64
+    #Instrucciones----------------------------------------------------------------------------------
+    def p_INSTRUCCIONES(t):
+        '''INSTRUCCIONES : INSTRUCCIONES INSTRUCCION 
+                      | INSTRUCCION
         '''
-        t[0] = TIPO_DATO["F64"]
+        if(len(t) == 3):
+            t[1].push(t[2])
+            t[0] = t[1]
+        else:
+            t[0] = [t[1]]
 
-    def p_TIPO_BOOL(t):
-        '''TIPO : bool
+    #Instruccion-------------------------------------------------------------------------------------
+    def p_INSTRUCCION_PRINT(t):
+        '''INSTRUCCION : PRINT
         '''
-        t[0] = TIPO_DATO["BOOL"]
-    
-    def p_TIPO_CHAR(t):
-        '''TIPO : char
-        '''
-        t[0] = TIPO_DATO["CHAR"]
-    
-    def p_TIPO_STR(t):
-        '''TIPO : str
-        '''
-        t[0] = TIPO_DATO["STR"]
+        t[0] = t[1]
 
-    def p_TIPO_STRING(t):
-        '''TIPO : string
+    #Print-------------------------------------------------------------------------------------------
+    def p_PRINT_CADENA(t):
+        '''PRINT : print parA cadena parC ptocoma
         '''
-        t[0] = TIPO_DATO["STRING"]
+        t[0] = Instruccion.println(t[3], None, t.lineno(1), t.lexpos(1))
+
+    def p_PRINT_OTROS(t):
+        '''PRINT : print parA cadena coma PVALORES parC ptocoma
+        '''
+        t[0] = Instruccion.println(t[3], t[5], t.lineno(1), t.lexpos(1))
+
+    def p_PRINT_VALORES(t):
+        '''PVALORES : PVALORES coma EXPRESION
+                    | EXPRESION
+        '''
+        if(len(t) == 3):
+            t[1].push(t[3])
+            t[0] = t[1]
+        else:
+            t[0] = [t[1]]
 
     #Expresiones-------------------------------------------------------------------------------------
     def p_EXPRESION_SUMA(t):
@@ -359,7 +377,7 @@ class Analizador:
         t[0] = Instruccion.valor(t[1], TIPO_VALOR["STR"], t.lineno(1), t.lexpos(1))
 
     def p_EXPRESION_CHAR(t):
-        '''EXPRESION :  char
+        '''EXPRESION :  car
         '''
         t[0] = Instruccion.valor(t[1], TIPO_VALOR["CHAR"], t.lineno(1), t.lexpos(1))
 
@@ -372,6 +390,37 @@ class Analizador:
         '''EXPRESION : EXPRESION as TIPO
         '''
         t[0] = Instruccion.casteo(t[3], t[1], TIPO_OPERACION["CASTEO"], t.lineno(1), t.lexpos(1))
+    
+    #Tipos-------------------------------------------------------------------------------------------
+    def p_TIPO_I64(t):
+        '''TIPO : i64
+        '''
+        t[0] = TIPO_DATO["I64"]
+
+    def p_TIPO_F64(t):
+        '''TIPO : f64
+        '''
+        t[0] = TIPO_DATO["F64"]
+
+    def p_TIPO_BOOL(t):
+        '''TIPO : bool
+        '''
+        t[0] = TIPO_DATO["BOOL"]
+    
+    def p_TIPO_CHAR(t):
+        '''TIPO : char
+        '''
+        t[0] = TIPO_DATO["CHAR"]
+    
+    def p_TIPO_STR(t):
+        '''TIPO : str
+        '''
+        t[0] = TIPO_DATO["STR"]
+
+    def p_TIPO_STRING(t):
+        '''TIPO : string
+        '''
+        t[0] = TIPO_DATO["STRING"]
 
     #Errores Sintaxis--------------------------------------------------------------------------------
     def p_error(t):
